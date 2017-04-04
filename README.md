@@ -34,11 +34,3 @@ Custom property | Description | Default
 ----------------|-------------|----------
 `--id-primary-light-border` | Default border color | #d9edf7
 `--id-primary-light` | Default background color | #eef7fb
-
-## Running Tests
-
-```
-$ polymer test
-```
-
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
