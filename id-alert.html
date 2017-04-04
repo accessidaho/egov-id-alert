@@ -1,0 +1,101 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`id-alert` Alert element with Idaho styling.
+
+@demo demo/index.html
+-->
+
+<dom-module id="id-alert">
+  <template>
+    <style>
+      :host {
+
+        --icon: "f05a";
+        --border-color: var(--id-primary-light-border, #d9edf7);
+        --background-color: var(--id-primary-light, #eef7fb);
+
+        display: block;
+        background: red;
+        color: #000;
+        background-color: var(--background-color);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 15px;
+        list-style: none;
+        margin-bottom: 30px;
+        margin-top: 0;
+        position: relative;
+        padding-left: 55px;
+      }
+
+      :host:before {
+        content: "\f05a";
+        position: absolute;
+        top: 50%;
+        margin-top: -12px;
+        left: 20px;
+        display: block;
+        font: normal normal normal 24px/1 FontAwesome;
+        color: inherit;
+        opacity: .75;
+      }
+
+      :host([color="success"]):before {
+        content: "\f058";
+      }
+
+      :host([color="danger"]):before {
+        content: "\f06a";
+      }
+
+    </style>
+    <slot id="content"></slot>
+  </template>
+
+  <script>
+    class IdAlert extends Polymer.Element {
+      static get is() { return 'id-alert'; }
+      static get properties() {
+        return {
+          /**
+           * Color variations for the alert. [Success, Warning, Danger]
+           */
+          color: {
+            type: String,
+            value: ''
+          }
+        };
+      }
+
+      constructor() {
+        super();
+
+        this.colors = {
+          success: {
+            '--border-color': '#558B2F',
+            '--background-color': '#f1f8e9'
+          },
+          danger: {
+            '--border-color': '#c62828',
+            '--background-color': '#fbe9e7'
+          },
+          warning: {
+            '--border-color': '#f0ad4e',
+            '--background-color': '#FFF3E0'
+          }
+        }
+      }
+
+      ready() {
+        super.ready();
+        if (this.colors[this.color]) {
+          this.updateStyles(this.colors[this.color]);
+        }
+      }
+
+    }
+
+    window.customElements.define(IdAlert.is, IdAlert);
+  </script>
+</dom-module>
