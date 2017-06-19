@@ -1,11 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
 
-<!--
-`id-alert` Alert element with Idaho styling.
-
-@demo demo/index.html
--->
-
 <dom-module id="id-alert">
   <template>
     <style>
@@ -40,15 +34,15 @@
         opacity: .75;
       }
 
-      :host([color="success"]):before {
+      :host([context="success"]):before {
         content: "\f058";
       }
 
-      :host([color="danger"]):before {
+      :host([context="danger"]):before {
         content: "\f06a";
       }
 
-      :host([color="print"]):before {
+      :host([context="print"]):before {
         content: "\f02f";
       }
 
@@ -57,14 +51,22 @@
   </template>
 
   <script>
+    /**
+     * `id-alert`
+     * Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
     class IdAlert extends Polymer.Element {
       static get is() { return 'id-alert'; }
       static get properties() {
         return {
           /**
-           * Color variations for the alert. [Success, Warning, Danger]
+           * Contextual variations for the alert. [success, warning, danger, print]
            */
-          color: {
+          context: {
             type: String,
             value: ''
           }
@@ -74,7 +76,7 @@
       constructor() {
         super();
 
-        this.colors = {
+        this.contexts = {
           success: {
             '--border-color': '#558B2F',
             '--background-color': '#f1f8e9'
@@ -96,8 +98,8 @@
 
       ready() {
         super.ready();
-        if (this.colors[this.color]) {
-          this.updateStyles(this.colors[this.color]);
+        if (this.contexts[this.context]) {
+          this.updateStyles(this.contexts[this.context]);
         }
       }
 
